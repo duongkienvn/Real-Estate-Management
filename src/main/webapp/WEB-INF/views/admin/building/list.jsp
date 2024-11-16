@@ -261,7 +261,7 @@
                                                     </div>
                                                     <div class="col-xs-5">
                                                         <label class="name">Số điện thoại quản lý</label>
-                                                        <form:input class="form-control" path="managerPhone"/>
+                                                        <form:input class="form-control" path="managerPhoneNumber"/>
                                                     </div>
                                                     <div class="col-xs-2">
                                                         <label class="name"
@@ -638,12 +638,13 @@
                 url: "${buildingAPI}/" + data,
                 data: JSON.stringify(data),
                 contentType: "application/json",
-                dataType: "JSON",
                 success: function (response) {
-                    console.log(response);
+                    alert("Deleted successfully!")
+                    console.log(response)
+                    window.location.href = "<c:url value="/admin/building-list"/>";
                 },
                 error: function (response) {
-                    console.log('failed');
+                    alert('failed');
                     console.log(response);
                 }
             });

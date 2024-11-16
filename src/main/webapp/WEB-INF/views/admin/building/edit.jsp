@@ -421,12 +421,13 @@
                 url: "${buildingAPI}",
                 data: JSON.stringify(data),
                 contentType: "application/json",
-                success: function (respond) {
-                    console.log("Success!")
+                success: function (response) {
+                    alert("Success!")
+                    console.log(response)
                 },
-                error: function (respond) {
-                    console.log("failed!")
-                    console.log(respond)
+                error: function (response) {
+                    alert("failed!")
+                    console.log(response)
                 }
             });
         };

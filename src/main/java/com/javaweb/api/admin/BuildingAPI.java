@@ -17,20 +17,20 @@ public class BuildingAPI {
 
     @PostMapping
     public BuildingDTO addOrUpdateBuilding(@RequestBody BuildingDTO buildingDTO) {
-        // xuong db de update hoac them moi
+        if (buildingDTO.getId() == null) {
+            buildingService.addBuilding(buildingDTO);
+        }
         return buildingDTO;
     }
 
     @DeleteMapping("/{ids}")
     public void deleteBuilding(@PathVariable List<Long> ids) {
-        // xuong db de xoa building theo danh sach gui ve
-        System.out.println("ok");
+        buildingService.deleteBuilding(ids);
     }
 
     @GetMapping("/{id}/staffs")
     public ResponseDTO loadStaffs(@PathVariable Long id) {
         ResponseDTO responseDTO = buildingService.listStaffs(id);
-
         return responseDTO;
     }
 
