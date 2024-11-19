@@ -259,7 +259,7 @@
                                 <div class="form-group">
                                     <label class="col-xs-3">Mô tả giá</label>
                                     <div class="col-xs-9">
-                                        <form:input class="form-control" path="priceDiscription"/>
+                                        <form:input class="form-control" path="rentPriceDescription"/>
                                     </div>
                                 </div>
 
@@ -336,7 +336,7 @@
                                 <div class="form-group">
                                     <label class="col-xs-3">Số điện thoại quản lý</label>
                                     <div class="col-xs-9">
-                                        <form:input class="form-control" path="managerPhone"/>
+                                        <form:input class="form-control" path="managerPhoneNumber"/>
                                     </div>
                                 </div>
 

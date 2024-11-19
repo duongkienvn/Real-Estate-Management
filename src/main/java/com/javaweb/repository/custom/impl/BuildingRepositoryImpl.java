@@ -4,12 +4,14 @@ import com.javaweb.entity.BuildingEntity;
 import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.repository.custom.BuildingRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.lang.reflect.Field;
 import java.util.List;
 
+@Repository
 public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
     @Autowired
     private EntityManager entityManager;

@@ -512,7 +512,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
-                        &times;
                     </button>
                     <h4 class="modal-title">Danh sách nhân viên</h4>
                 </div>
@@ -561,7 +560,7 @@
                 url: '${buildingAPI}/' + buildingId + '/staffs',
                 // data: JSON.stringify(data),
                 contentType: "application/json",
-                dataType: "json",
+                // dataType: "json",
                 success: function (response) {
                     var row = '';
                     $.each(response.data, function (index, item) {
@@ -602,9 +601,8 @@
                 type: "POST",
                 data: JSON.stringify(data),
                 contentType: "application/json",
-                dataType: 'json',
                 success: function (response) {
-                    console.info("Success!")
+                    alert("Success!")
                 },
                 error: function (response) {
                     console.info("Giao Không Thành Cong!")

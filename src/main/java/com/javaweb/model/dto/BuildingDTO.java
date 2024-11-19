@@ -1,8 +1,6 @@
 package com.javaweb.model.dto;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class BuildingDTO extends AbstractDTO {
     private String name;
@@ -14,9 +12,9 @@ public class BuildingDTO extends AbstractDTO {
     private Long numberOfBasement;
     private String direction;
     private Long level;
-    private Long rentArea;
+    private String rentArea;
     private Long rentPrice;
-    private String priceDiscription;
+    private String rentPriceDescription;
     private String carFee;
     private String overtimeFee;
     private String electricityFee;
@@ -25,7 +23,7 @@ public class BuildingDTO extends AbstractDTO {
     private String rentTime;
     private String decorationTime;
     private String managerName;
-    private String managerPhone;
+    private String managerPhoneNumber;
     private Double brokerageFee;
     private String serviceFee;
     private String motorFee;
@@ -119,11 +117,11 @@ public class BuildingDTO extends AbstractDTO {
         this.level = level;
     }
 
-    public Long getRentArea() {
+    public String getRentArea() {
         return rentArea;
     }
 
-    public void setRentArea(Long rentArea) {
+    public void setRentArea(String rentArea) {
         this.rentArea = rentArea;
     }
 
@@ -135,12 +133,12 @@ public class BuildingDTO extends AbstractDTO {
         this.rentPrice = rentPrice;
     }
 
-    public String getPriceDiscription() {
-        return priceDiscription;
+    public String getRentPriceDescription() {
+        return rentPriceDescription;
     }
 
-    public void setPriceDiscription(String priceDiscription) {
-        this.priceDiscription = priceDiscription;
+    public void setRentPriceDescription(String rentPriceDescription) {
+        this.rentPriceDescription = rentPriceDescription;
     }
 
     public String getCarFee() {
@@ -207,12 +205,12 @@ public class BuildingDTO extends AbstractDTO {
         this.managerName = managerName;
     }
 
-    public String getManagerPhone() {
-        return managerPhone;
+    public String getManagerPhoneNumber() {
+        return managerPhoneNumber;
     }
 
-    public void setManagerPhone(String managerPhone) {
-        this.managerPhone = managerPhone;
+    public void setManagerPhoneNumber(String managerPhoneNumber) {
+        this.managerPhoneNumber = managerPhoneNumber;
     }
 
     public Double getBrokerageFee() {

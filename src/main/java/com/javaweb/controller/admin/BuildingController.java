@@ -54,11 +54,11 @@ public class BuildingController {
     @GetMapping("/admin/building-edit-{id}")
     public ModelAndView buildingEdit(@PathVariable("id") Long id, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("admin/building/edit");
-        BuildingDTO buildingDTO = new BuildingDTO();
-
+        BuildingDTO buildingDTO = buildingService.findBuildingById(id);
         modelAndView.addObject("buildingEdit", buildingDTO);
         modelAndView.addObject("districts", District.district());
         modelAndView.addObject("typeCodes", TypeCode.typeCode());
+
         return modelAndView;
     }
 }

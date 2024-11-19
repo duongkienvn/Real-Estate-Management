@@ -51,7 +51,7 @@ public class BuildingEntity {
     private String carFee;
 
     @Column(name = "electricityfee")
-    private String electricFee;
+    private String electricityFee;
 
     @Column(name = "deposit")
     private String deposit;
@@ -73,6 +73,39 @@ public class BuildingEntity {
 
     @Column(name = "managerphonenumber")
     private String managerPhoneNumber;
+
+    @Column(name = "motofee")
+    private String motorFee;
+
+    @Column(name = "overtimefee")
+    private String overtimeFee;
+
+    @Column(name = "decorationtime")
+    private String decorationTime;
+
+    public String getMotorFee() {
+        return motorFee;
+    }
+
+    public void setMotorFee(String motorFee) {
+        this.motorFee = motorFee;
+    }
+
+    public String getOvertimeFee() {
+        return overtimeFee;
+    }
+
+    public void setOvertimeFee(String overtimeFee) {
+        this.overtimeFee = overtimeFee;
+    }
+
+    public String getDecorationTime() {
+        return decorationTime;
+    }
+
+    public void setDecorationTime(String decorationTime) {
+        this.decorationTime = decorationTime;
+    }
 
     @OneToMany(mappedBy = "building", fetch = FetchType.LAZY)
     private List<AssignmentBuildingEntity> assignmentBuildingEntities;
@@ -206,12 +239,12 @@ public class BuildingEntity {
         this.carFee = carFee;
     }
 
-    public String getElectricFee() {
-        return electricFee;
+    public String getElectricityFee() {
+        return electricityFee;
     }
 
-    public void setElectricFee(String electricFee) {
-        this.electricFee = electricFee;
+    public void setElectricityFee(String electricityFee) {
+        this.electricityFee = electricityFee;
     }
 
     public String getDeposit() {
