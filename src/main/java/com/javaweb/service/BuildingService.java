@@ -15,4 +15,5 @@ public interface BuildingService {
     void updateBuilding(BuildingDTO buildingDTO);
     void deleteBuilding(List<Long> id);
     BuildingDTO findBuildingById(Long id);
+    void assignBuilding(AssignmentBuildingDTO assignmentBuildingDTO);
 }

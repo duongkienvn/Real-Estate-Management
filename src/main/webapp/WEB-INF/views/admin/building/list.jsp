@@ -589,9 +589,7 @@
                 return $(this).val();
             }).get();
             data['staffs'] = staffs;
-            if (data['staffs'] != '') {
-                assignment(data);
-            }
+            assignment(data);
             console.log("ok");
         });
 
@@ -647,8 +645,6 @@
                 }
             });
         };
-
-
     </script>
 </div>
 </body>

@@ -1,7 +1,6 @@
 package com.javaweb.service.impl;
 
 import com.javaweb.converter.BuildingConverter;
-import com.javaweb.entity.AssignmentBuildingEntity;
 import com.javaweb.entity.BuildingEntity;
 import com.javaweb.entity.RentAreaEntity;
 import com.javaweb.entity.UserEntity;
@@ -11,9 +10,7 @@ import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.model.response.BuildingSearchResponse;
 import com.javaweb.model.response.ResponseDTO;
 import com.javaweb.model.response.StaffResponseDTO;
-import com.javaweb.repository.AssignmentBuildingRepository;
 import com.javaweb.repository.BuildingRepository;
-import com.javaweb.repository.RentAreaRepository;
 import com.javaweb.repository.UserRepository;
 import com.javaweb.service.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +19,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -36,23 +32,12 @@ public class BuildingServiceImpl implements BuildingService {
     @Autowired
     private BuildingConverter buildingConverter;
 
-    @Autowired
-    private AssignmentBuildingRepository assignmentBuildingRepository;
-
-    @Autowired
-    private RentAreaRepository rentAreaRepository;
-
     @Override
     public ResponseDTO listStaffs(Long buildingId) {
         ResponseDTO result = new ResponseDTO();
         BuildingEntity buildingEntity = buildingRepository.findById(buildingId).get();
         List<UserEntity> staffList = userRepository.findByStatusAndRoles_Code(1, "STAFF");
-        List<AssignmentBuildingEntity> assignmentBuildingEntities = buildingEntity.getAssignmentBuildingEntities();
-
-        List<UserEntity> assignmentStaff = new ArrayList<>();
-        assignmentStaff.addAll(assignmentBuildingEntities.stream()
-                .map(key -> key.getUserEntity())
-                .collect(Collectors.toList()));
+        List<UserEntity> assignmentStaff = buildingEntity.getUserEntities();
 
         List<StaffResponseDTO> staffResponseDTOS = new ArrayList<>();
 
@@ -89,9 +74,9 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public void addBuilding(BuildingDTO buildingDTO) {
         BuildingEntity building = buildingConverter.convertToBuildingEntity(buildingDTO);
-        buildingRepository.save(building);
         List<RentAreaEntity> rentAreaEntities = addRentArea(buildingDTO, building);
-        rentAreaRepository.saveAll(rentAreaEntities);
+        building.setRentAreaEntities(rentAreaEntities);
+        buildingRepository.save(building);
     }
 
     @Override
@@ -105,17 +90,9 @@ public class BuildingServiceImpl implements BuildingService {
         BuildingEntity existingBuilding = buildingRepository.findById(buildingDTO.getId())
                 .orElseThrow(() -> new RuntimeException("Building not found with ID: " + buildingDTO.getId()));
         existingBuilding = buildingConverter.convertToBuildingEntity(buildingDTO);
+        List<RentAreaEntity> rentAreaEntityList = addRentArea(buildingDTO, existingBuilding);
+        existingBuilding.setRentAreaEntities(rentAreaEntityList);
 
-        List<RentAreaEntity> rentAreaEntities = rentAreaRepository.getRentAreaEntitiesByBuildingId(buildingDTO.getId());
-        String rentAreaOld = rentAreaEntities.stream()
-                .map(rentAreaEntity -> rentAreaEntity.getValue().toString())
-                .collect(Collectors.joining(","));
-
-        if (!buildingDTO.getRentArea().equals(rentAreaOld)) {
-            rentAreaRepository.deleteRentAreaEntitiesByBuildingId(buildingDTO.getId());
-            List<RentAreaEntity> rentAreaEntityList = addRentArea(buildingDTO, existingBuilding);
-            rentAreaRepository.saveAll(rentAreaEntityList);
-        }
         buildingRepository.save(existingBuilding);
     }
 
@@ -144,9 +121,15 @@ public class BuildingServiceImpl implements BuildingService {
         if (buildingIdList == null || buildingIdList.isEmpty()) {
             return;
         }
-
-        rentAreaRepository.deleteRentAreaEntitiesByBuildingIdIn(buildingIdList);
-        assignmentBuildingRepository.deleteAssignmentBuildingEntitiesByBuildingIdIn(buildingIdList);
         buildingRepository.deleteAllById(buildingIdList);
+    }
+
+    @Override
+    public void assignBuilding(AssignmentBuildingDTO assignmentBuildingDTO) {
+        BuildingEntity building = buildingRepository.findBuildingEntityById(assignmentBuildingDTO.getBuildingId());
+        List<Long> staffIdList = assignmentBuildingDTO.getStaffs();
+        List<UserEntity> userEntities = userRepository.findUserEntitiesByIdIn(staffIdList);
+        building.setUserEntities(userEntities);
+        buildingRepository.save(building);
     }
 }
