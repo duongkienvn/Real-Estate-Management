@@ -263,6 +263,7 @@
                                                         <label class="name">Số điện thoại quản lý</label>
                                                         <form:input class="form-control" path="managerPhoneNumber"/>
                                                     </div>
+                                                    <security:authorize access="hasRole('MANAGER')">
                                                     <div class="col-xs-2">
                                                         <label class="name"
                                                         >Chọn nhân viên phụ trách</label
@@ -272,6 +273,7 @@
                                                             <form:options items="${staffList}"/>
                                                         </form:select>
                                                     </div>
+                                                    </security:authorize>
                                                 </div>
                                                 <div class="col-xs-12">
                                                     <div class="col-xs-6">
@@ -308,6 +310,7 @@
 
                             <div class="pull-right">
                                 <a href="/admin/building-edit">
+                                    <security:authorize access="hasRole('MANAGER')">
                                     <button class="btn btn-info" title="Thêm tòa nhà">
                                         <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -325,7 +328,9 @@
                                             />
                                         </svg>
                                     </button>
+                                    </security:authorize>
                                 </a>
+                                <security:authorize access="hasRole('MANAGER')">
                                 <button class="btn btn-danger" title="Xóa tòa nhà" id="btnDeleteBuilding">
                                     <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -346,6 +351,7 @@
                                         />
                                     </svg>
                                 </button>
+                                </security:authorize>
                             </div>
                         </div>
                     </div>
@@ -401,25 +407,27 @@
                                     <td>${item.brokerageFee}</td>
                                     <td>
                                         <div class="hidden-sm hidden-xs btn-group">
-                                            <button
-                                                    class="btn btn-xs btn-success"
-                                                    title="Giao tòa nhà"
-                                                    onclick="assignmentBuilding(${item.id})"
-                                            >
-                                                <i
-                                                        class="icon-only ace-icon fa fa-align-justify"
-                                                ></i>
-                                            </button>
-
+                                            <security:authorize access="hasRole('MANAGER')">
+                                                <button
+                                                        class="btn btn-xs btn-success"
+                                                        title="Giao tòa nhà"
+                                                        onclick="assignmentBuilding(${item.id})"
+                                                >
+                                                    <i
+                                                            class="icon-only ace-icon fa fa-align-justify"
+                                                    ></i>
+                                                </button>
+                                            </security:authorize>
                                             <a class="btn btn-xs btn-info" title="Sửa tòa nhà"
                                                href="/admin/building-edit-${item.id}">
                                                 <i class="ace-icon fa fa-pencil bigger-120"></i>
                                             </a>
-
+                                            <security:authorize access="hasRole('MANAGER')">
                                             <button class="btn btn-xs btn-danger" title="Xóa tòa nhà"
                                                     onclick="deleteBuilding(${item.id})">
                                                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                             </button>
+                                            </security:authorize>
                                         </div>
 
                                         <div class="hidden-md hidden-lg">
