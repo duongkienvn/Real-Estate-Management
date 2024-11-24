@@ -40,8 +40,6 @@ public class UserService implements IUserService {
     @Autowired
     private UserConverter userConverter;
 
-
-
     @Override
     public UserDTO findOneByUserNameAndStatus(String name, int status) {
         return userConverter.convertToDto(userRepository.findOneByUserNameAndStatus(name, status));
