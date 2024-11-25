@@ -3,7 +3,7 @@ package com.javaweb.constant;
 public class SystemConstant {
     /*Spring security 4: ROLE_ADMIN, Spring security 3 not required*/
     public static final String ONE_EQUAL_ONE = " WHERE 1 = 1 ";
-    public static final String ADMIN_ROLE = "ROLE_ADMIN";
+    public static final String ADMIN_ROLE = "ROLE_STAFF";
     /*Spring security 4: ROLE_ADMIN, Spring security 3 not required*/
     public static final String USER_ROLE = "ROLE_USER";
     public static final String MANAGER_ROLE = "ROLE_MANAGER";
@@ -19,4 +19,6 @@ public class SystemConstant {
     public static final String PASSWORD_DEFAULT = "123456";
     public static final String CHANGE_PASSWORD_FAIL = "change_password_fail";
     public static final String BUILDING_NOT_FOUND = "BUILDING_NOT_FOUND";
+
+
 }

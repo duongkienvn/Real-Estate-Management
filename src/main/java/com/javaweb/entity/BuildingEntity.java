@@ -62,7 +62,7 @@ public class BuildingEntity {
     @Column(name = "renttime")
     private String rentTime;
 
-    @Column(name = "brokerage")
+    @Column(name = "brokeragefee")
     private Double brokerageFee;
 
     @Column(name = "type")
@@ -71,7 +71,7 @@ public class BuildingEntity {
     @Column(name = "managername")
     private String managerName;
 
-    @Column(name = "managerphonenumber")
+    @Column(name = "managerphone")
     private String managerPhoneNumber;
 
     @Column(name = "motofee")
