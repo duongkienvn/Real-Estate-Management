@@ -38,6 +38,17 @@ public class UserEntity extends BaseEntity {
     @ManyToMany(mappedBy = "userEntities", fetch = FetchType.LAZY)
     List<BuildingEntity> buildingEntities = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "userEntities", fetch = FetchType.LAZY)
+    private List<CustomerEntity> customerEntities = new ArrayList<>();
+
+    public List<CustomerEntity> getCustomerEntities() {
+        return customerEntities;
+    }
+
+    public void setCustomerEntities(List<CustomerEntity> customerEntities) {
+        this.customerEntities = customerEntities;
+    }
+
     public List<BuildingEntity> getBuildingEntities() {
         return buildingEntities;
     }
@@ -98,7 +109,8 @@ public class UserEntity extends BaseEntity {
     public void setEmail(String email) {
         this.email = email;
     }
-        @Override
+
+    @Override
     public Long getId() {
         return id;
     }

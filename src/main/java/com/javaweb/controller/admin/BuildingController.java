@@ -6,6 +6,7 @@ import com.javaweb.enums.TypeCode;
 import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.model.response.BuildingSearchResponse;
+import com.javaweb.security.utils.SecurityUtils;
 import com.javaweb.service.BuildingService;
 import com.javaweb.service.IUserService;
 import org.modelmapper.ModelMapper;
@@ -32,13 +33,20 @@ public class BuildingController {
     @GetMapping("/admin/building-list")
     public ModelAndView buildingList(@ModelAttribute BuildingSearchRequest buildingSearchRequest, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("admin/building/list");
-        modelAndView.addObject("modelSearch", buildingSearchRequest);
 
-        List<BuildingSearchResponse> responseList = buildingService.findBuilding(buildingSearchRequest);
-        modelAndView.addObject("buildingList", responseList);
+        modelAndView.addObject("modelSearch", buildingSearchRequest);
         modelAndView.addObject("staffList", service.getStaffs());
         modelAndView.addObject("districts", District.district());
         modelAndView.addObject("typeCode", TypeCode.typeCode());
+
+        if (SecurityUtils.getAuthorities().contains("ROLE_STAFF")) {
+            Long staffId = SecurityUtils.getPrincipal().getId();
+            buildingSearchRequest.setStaffId(staffId);
+            modelAndView.addObject("buildingList", buildingService.findBuilding(buildingSearchRequest));
+        } else {
+            modelAndView.addObject("buildingList", buildingService.findBuilding(buildingSearchRequest));
+        }
+
         return modelAndView;
     }
 

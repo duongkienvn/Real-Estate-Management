@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "building")
-public class BuildingEntity {
+public class BuildingEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -114,7 +114,7 @@ public class BuildingEntity {
     private List<UserEntity> userEntities = new ArrayList<>();
 
     @OneToMany(mappedBy = "building", fetch = FetchType.LAZY
-            , cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+            , cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE}, orphanRemoval = true)
     private List<RentAreaEntity> rentAreaEntities = new ArrayList<>();
 
     public List<RentAreaEntity> getRentAreaEntities() {
