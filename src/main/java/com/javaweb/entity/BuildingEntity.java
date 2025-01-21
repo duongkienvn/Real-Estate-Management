@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "building")
-public class BuildingEntity extends BaseEntity {
+public class BuildingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -62,7 +62,7 @@ public class BuildingEntity extends BaseEntity {
     @Column(name = "renttime")
     private String rentTime;
 
-    @Column(name = "brokerage")
+    @Column(name = "brokeragefee")
     private Double brokerageFee;
 
     @Column(name = "type")
@@ -71,7 +71,7 @@ public class BuildingEntity extends BaseEntity {
     @Column(name = "managername")
     private String managerName;
 
-    @Column(name = "managerphonenumber")
+    @Column(name = "managerphone")
     private String managerPhoneNumber;
 
     @Column(name = "motofee")
@@ -114,7 +114,7 @@ public class BuildingEntity extends BaseEntity {
     private List<UserEntity> userEntities = new ArrayList<>();
 
     @OneToMany(mappedBy = "building", fetch = FetchType.LAZY
-            , cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE}, orphanRemoval = true)
+            , cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<RentAreaEntity> rentAreaEntities = new ArrayList<>();
 
     public List<RentAreaEntity> getRentAreaEntities() {

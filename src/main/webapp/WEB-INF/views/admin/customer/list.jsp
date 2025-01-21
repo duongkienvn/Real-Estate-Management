@@ -309,7 +309,7 @@
                                     <td>${item.email}</td>
                                     <td>${item.demand}</td>
                                     <td>${item.createdBy}</td>
-                                    <td>${item.createDate}</td>
+                                    <td>${item.createdDate}</td>
                                     <td>${item.status}</td>
                                     <td>
                                         <div class="hidden-sm hidden-xs btn-group">

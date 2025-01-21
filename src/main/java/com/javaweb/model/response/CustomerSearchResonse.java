@@ -9,7 +9,7 @@ public class CustomerSearchResonse {
     private String email;
     private String demand;
     private String createdBy;
-    private Date createDate;
+    private Date createdDate;
     private String status;
 
     public Long getId() {
@@ -60,12 +60,12 @@ public class CustomerSearchResonse {
         this.createdBy = createdBy;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getStatus() {

@@ -278,7 +278,7 @@
                     console.log(response)
                 },
                 error: function (response) {
-                    alert("failed!")
+                    alert("Failed!")
                     console.log(response)
                 }
             });

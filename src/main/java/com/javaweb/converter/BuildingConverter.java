@@ -53,8 +53,6 @@ public class BuildingConverter {
                 .map(key -> key.getValue().toString())
                 .collect(Collectors.joining(","));
         buildingDTO.setRentArea(rentArea);
-
-
         buildingDTO.setTypeCode(new ArrayList<>(Arrays.asList(typeCode)));
 
         return buildingDTO;

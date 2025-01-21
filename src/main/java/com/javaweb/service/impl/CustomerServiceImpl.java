@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -74,7 +76,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void updateCustomer(CustomerDTO customerDTO) {
+        CustomerEntity existingCustomer = customerRepository.findById(customerDTO.getId()).get();
+        String created = existingCustomer.getCreatedBy();
+        existingCustomer = customerConverter.converToCustomer(customerDTO);
+        existingCustomer.setCreatedBy(created);
 
+        customerRepository.save(existingCustomer);
     }
 
     @Override
